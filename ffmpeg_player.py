@@ -23,13 +23,14 @@ def player(filename,dry=False):
             else:
                 print(f"Error: Could Not find English Audio Track, Defaulting to track 0:1. Please check the file with ffprobe {filename}")
                 audio_stream = str(1)
-            for i in range(3,20):
+            for i in range(2,20):
                 subtitle_stream = str(i)
                 if f"Stream #0:{subtitle_stream}(eng)" in ffprobe_result:
                     print(f"Notice: English Subtitle Stream Found in stream 0:{subtitle_stream}")
                     break
             else:
                 print(f"Notice: Could Not find English Subtitle Track. If this is incorrect, Please check the file with ffprobe {filename}")
+                subtitle_stream = str(2)
 
 
             ffmpeg_command = [
