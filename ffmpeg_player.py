@@ -46,18 +46,18 @@ def player(filename,dry=False):
                                 "-hwaccel_output_format", "cuda",  # Use CUDA for output format
                                 "-re",        # Repeat input (useful for streams)
                                 "-i", filename,  # Input file path (replace with actual filename variable)
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
                                 "-map", "0:v",
                                 "-map", f"0:{audio_stream}",  # Selects the the English audio
                                 "-map", f"0:{subtitle_stream}?",
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-maxrate", "10M",  # Maximum bitrate: 25000 kbps
-                                "-bufsize", "1000k",    # Buffer size: 1000 kb
-                                "-b:v", "5M",      # Video bitrate: 5 Mbps
-                                "-f", "flv",     # Output format: FLV
-                                "rtmp://10.0.0.19/live/stream"  # Destination URL for streaming
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-maxrate", "10M",  # Maximum bitrate: 25000 kbps
+                                # "-bufsize", "1000k",    # Buffer size: 1000 kb
+                                # "-b:v", "5M",      # Video bitrate: 5 Mbps
+                                # "-f", "flv",     # Output format: FLV
+                                # "rtmp://10.0.0.19/live/stream"  # Destination URL for streaming
                                 
                                 #Low Quality Stream
                                 
@@ -70,6 +70,7 @@ def player(filename,dry=False):
                                 "-tune", "zerolatency",
                                 "-crf", "23",
                                 "-hls_list_size", "0",
+                                "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_low"  # Destination URL for streaming
                             ]
             print(ffmpeg_command)
