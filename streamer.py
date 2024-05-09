@@ -74,30 +74,33 @@ def play_random_media():
 
     if media_type == "series" and args.series_file is not None:
         # Use appropriate shuffled series filename (e.g., json_shuffled_series.json)
-        while played_successful is not True:
-            for i, filename in enumerate(series):
+        for i, filename in enumerate(series):
+            while played_successful is not True:
                 played_successful = ffmpeg_player.player(filename, "series")
-                del series[i]
-                jsoner.creator(series,"shuffled_"+media_type,"filenames")
-                break
+                if played_successful:
+                    del series[i]
+                    jsoner.creator(series,"shuffled_"+media_type,"filenames")
+                    break
         return True
     elif media_type == "movies" and args.movies_file is not None:
         # Use appropriate shuffled movie filename (e.g., json_shuffled_movies.json)
-        while played_successful is not True:
-            for i, filename in enumerate(movies):
+        for i, filename in enumerate(movies):
+            while played_successful is not True:
                 played_successful = ffmpeg_player.player(filename, "movies")
-                del movies[i]
-                jsoner.creator(movies,"shuffled_"+media_type,"filenames")
-                break
+                if played_successful:
+                    del movies[i]
+                    jsoner.creator(movies,"shuffled_"+media_type,"filenames")
+                    break
         return True
     elif media_type == "youtube" and args.youtube_file is not None:
         # Use appropriate shuffled Youtube filename (e.g., json_shuffled_Youtube.json)
-        while played_successful is not True:
-            for i, filename in enumerate(youtube):
+        for i, filename in enumerate(youtube):
+            while played_successful is not True:
                 played_successful = ffmpeg_player.player(filename, "youtube")
-                del youtube[i]
-                jsoner.creator(youtube,"shuffled_"+media_type,"filenames")
-                break
+                if played_successful:
+                    del youtube[i]
+                    jsoner.creator(youtube,"shuffled_"+media_type,"filenames")
+                    break
         return True
     else:
         print(f"No {media_type} file provided or both arguments were specified.")
