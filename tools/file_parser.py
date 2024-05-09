@@ -7,7 +7,7 @@ video_extensions = ["mp4", "avi", "mkv"]
 directory_series = ["/HDD_1/plexmedia/series", "/HDD_2/plexmedia/series"]
 directory_movies = ["/HDD_1/plexmedia/movies", "/HDD_2/plexmedia/movies"]
 directory_bumps = ["/home/pokeruadmin/streamer/bumps"]
-directory_youtube = ["/home/pokeruadmin/streamer/Youtube"]
+directory_youtube = ["/HDD_2/videos"]
 
 # Initialize empty list for filenames
 all_filenames = []
