@@ -62,6 +62,7 @@ def player(filename,dry=False):
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 "-b:v", "256k",      # Video bitrate: 5 Mbps
                                 # "-vf", "'scale=480:trunc(ow/a/2)*2'", #Will Figure out how this works later
+                                "-tune", "zerolatency",
                                 "-hls_list_size", "0",
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_low",  # Destination URL for streaming
@@ -77,6 +78,7 @@ def player(filename,dry=False):
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 "-b:v", "768k",      # Video bitrate: 256k
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                "-tune", "zerolatency",
                                 "-hls_list_size", "0",
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_mid",  # Destination URL for streaming
@@ -92,6 +94,7 @@ def player(filename,dry=False):
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 "-b:v", "1024k",      # Video bitrate: 5 Mbps
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                "-tune", "zerolatency",
                                 "-hls_list_size", "0",
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_high",  # Destination URL for streaming
@@ -107,6 +110,7 @@ def player(filename,dry=False):
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 "-b:v", "1920k",      # Video bitrate: 5 Mbps
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                "-tune", "zerolatency",
                                 "-hls_list_size", "0",
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_higher`",  # Destination URL for streaming
@@ -122,6 +126,7 @@ def player(filename,dry=False):
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 # "-b:v", "10M",      # Video bitrate: 5 Mbps
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                "-tune", "zerolatency",
                                 "-hls_list_size", "0",
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_src"  # Destination URL for streaming
