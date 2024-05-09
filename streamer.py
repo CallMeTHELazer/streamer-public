@@ -33,8 +33,6 @@ json_shuffled_youtube_file = "/home/pokeruadmin/streamer/json_shuffled_youtube.j
 # json_shuffled_bumps_file = "json_shuffled_bumps.json"
 
 kill_var = True
-played_successful = False
-
 
 def shuffle_files(json_file,media_type):
 
@@ -112,6 +110,7 @@ if __name__ == "__main__":
 
     if args.override_file != None:
         
+        played_successful = False
         override_file = args.override_file
         print(f"Override Found. Playing File: "+override_file)
         while played_successful is not True:
