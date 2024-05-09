@@ -24,24 +24,21 @@ json_movie_file = args.movies_file
 json_series_file= args.series_file
 json_youtube_file= args.youtube_file
 json_bumps_file= "json_bumps.json"
-json_shuffled_movies_file = "~/streamer-public/json_shuffled_movies.json"
-json_shuffled_series_file = "~/streamer-public/json_shuffled_series.json"
-json_shuffled_bumps_file = "~/streamer-public/json_shuffled_bumps.json"
-json_shuffled_youtube_file = "~/streamer-public/json_shuffled_youtube.json"
-# json_shuffled_movies_file = "json_shuffled_movies.json"
-# json_shuffled_series_file = "json_shuffled_series.json"
-# json_shuffled_bumps_file = "json_shuffled_bumps.json"
-# json_shuffled_youtube_file = "json_shuffled_youtube.json"
+
+json_directory_file = "~/streamer-public/json_directory.json"
+json_shuffled_directory_file = "~/streamer-public/json_shuffled_directory.json"
+# json_directory_file = "json_shuffled_directory.json"
+
 
 kill_var = True
 
 def shuffle_files(json_file,media_type):
 
-    files = jsoner.loader(json_file,"filenames")
+    files = jsoner.loader(json_file,media_type)
 
     shuffle(files)
 
-    jsoner.creator(files,"shuffled_"+media_type,"filenames")
+    jsoner.creator(files,json_shuffled_directory_file,media_type)
     return files
 
 
@@ -51,13 +48,13 @@ def play_random_media():
     choices = []
     if args.series_file is not None:
         choices.append("series")
-        movies = jsoner.loader(json_shuffled_movies_file,"filenames")
+        movies = jsoner.loader(json_shuffled_directory_file,"series")
     if args.movies_file is not None:
         choices.append("movies")
-        series = jsoner.loader(json_shuffled_series_file,"filenames")
+        series = jsoner.loader(json_shuffled_directory_file,"movies")
     if args.youtube_file is not None:
         choices.append("youtube")
-        youtube = jsoner.loader(json_shuffled_youtube_file,"filenames")
+        youtube = jsoner.loader(json_shuffled_directory_file,"youtube")
 
     media_type = random.choice(choices)
 
@@ -71,7 +68,7 @@ def play_random_media():
                 played_successful = ffmpeg_player.player(filename, args.dry)
                 if played_successful:
                     del series[i]
-                    jsoner.creator(series,"shuffled_"+media_type,"filenames")
+                    jsoner.creator(series,json_shuffled_directory_file,"series")
                     break
         return True
     elif media_type == "movies" and args.movies_file is not None:
@@ -81,7 +78,7 @@ def play_random_media():
                 played_successful = ffmpeg_player.player(filename, args.dry)
                 if played_successful:
                     del movies[i]
-                    jsoner.creator(movies,"shuffled_"+media_type,"filenames")
+                    jsoner.creator(movies,json_shuffled_directory_file,"movies")
                     break
         return True
     elif media_type == "youtube" and args.youtube_file is not None:
@@ -91,7 +88,7 @@ def play_random_media():
                 played_successful = ffmpeg_player.player(filename, args.dry)
                 if played_successful:
                     del youtube[i]
-                    jsoner.creator(youtube,"shuffled_"+media_type,"filenames")
+                    jsoner.creator(youtube,json_shuffled_directory_file,"youtube")
                     break
         return True
     else:
@@ -115,19 +112,19 @@ if __name__ == "__main__":
         if args.series_file != None:
             print(f"Series File Found.")
             if args.shuffle is True:
-                shuffle_files(json_series_file,"series")
+                shuffle_files(json_directory_file,"series")
         if args.movies_file != None:
             print(f"Movies File Found.")
             if args.shuffle is True:
-                shuffle_files(json_movie_file,"movies")
+                shuffle_files(json_directory_file,"movies")
         if args.youtube_file != None:
             print(f"Youtube File Found.")
             if args.shuffle is True:
-                shuffle_files(json_youtube_file,"youtube")
+                shuffle_files(json_directory_file,"youtube")
 
         while kill_var is True:
             kill_var = play_random_media()
-            movies_left = jsoner.counter(json_shuffled_movies_file,"filenames")
+            movies_left = jsoner.counter(json_shuffled_directory_file,"movies")
             if movies_left < 1:
                 break
             # time.sleep(11)

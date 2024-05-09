@@ -1,6 +1,6 @@
 import os
 import argparse
-import jsoner as jsoner
+import jsoner
 
 # Define video extensions
 video_extensions = ["mp4", "avi", "mkv"]
@@ -9,15 +9,13 @@ directory_movies = ["/HDD_1/plexmedia/movies", "/HDD_2/plexmedia/movies"]
 directory_bumps = ["/home/pokeruadmin/streamer/bumps"]
 directory_youtube = ["/HDD_2/videos"]
 
-# Initialize empty list for filenames
-# all_filenames = []
 
 def creator_series(series):
     if series is True:
         print("Series Requested. Gathering Series filenames.")
         # Loop through target directories
         files = walker(directory_series)
-        jsoner.creator(files,"series","filenames")
+        jsoner.creator(files,"directory","series")
     else:
        print("Series Not Selected, please use '--series' if you want to search through the series.")
 
@@ -26,7 +24,7 @@ def creator_movies(movies):
         print("Movies Requested. Gathering Movies filenames.")
         # Loop through target directories
         files = walker(directory_movies)
-        jsoner.creator(files,"movies","filenames")
+        jsoner.creator(files,"directory","movies")
     else:
        print("Movies Not Selected, please use '--movies' if you want to search through the movies.")
 
@@ -35,7 +33,7 @@ def creator_bumps(bumps):
         print("Bumps Requested. Gathering Bumps filenames.")
         # Loop through target directories
         files = walker(directory_bumps)
-        jsoner.creator(files,"bumps","filenames")
+        jsoner.creator(files,"directory","movies")
     else:
        print("Bumps Not Selected, please use '--bumps' if you want to search through the bumps.")
 
@@ -44,7 +42,7 @@ def creator_youtube(youtube):
         print("Youtube Requested. Gathering Bumps filenames.")
         # Loop through target directories
         files = walker(directory_youtube)
-        jsoner.creator(files,"youtube","filenames")
+        jsoner.creator(files,"directory","movies")
     else:
        print("Youtube Not Selected, please use '--youtube' if you want to search through the youtube.")
 
