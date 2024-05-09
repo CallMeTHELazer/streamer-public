@@ -49,9 +49,9 @@ def player(filename,dry=False):
                                 # "-async", "1",
                                 # "-vsync", "-1",
                                 # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-map", "0:v",
-                                "-map", f"0:{audio_stream}",  # Selects the the English audio
-                                "-map", f"0:{subtitle_stream}?",
+                                # "-map", "0:v",
+                                # "-map", f"0:{audio_stream}",  # Selects the the English audio
+                                # "-map", f"0:{subtitle_stream}?",
                                 # "-c:a", "aac",  # Audio codec: aac
                                 # "-ac", "2",     # Audio channels: 2
                                 # "-ar", "22050",  # Audio sample rate: 22050 Hz
@@ -121,13 +121,13 @@ def player(filename,dry=False):
                                 "-c:a", "aac",  # Audio codec: aac
                                 "-ac", "2",     # Audio channels: 2
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                # "-b:v", "256k",      # Video bitrate: 5 Mbps
+                                "-b:v", "10M",      # Video bitrate: 5 Mbps
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
                                 # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
                                 # "-crf", "23", #I dont think this is a HWACCEL setting
                                 # "-hls_list_size", "0",
                                 "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_src",  # Destination URL for streaming
+                                "rtmp://10.0.0.19/hls/stream_src"  # Destination URL for streaming
 
                                 # ##-----Encoder-----##                                
                                                                 
