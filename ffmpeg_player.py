@@ -77,17 +77,17 @@ def player(filename,dry=False):
 
                                 #Mid Quality Stream
                                 
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "768k",      # Video bitrate: 256k
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",
-                                # "-crf", "23",
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_mid"  # Destination URL for streaming
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-b:v", "768k",      # Video bitrate: 256k
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",
+                                # # "-crf", "23",
+                                # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/stream_mid"  # Destination URL for streaming
 
                                 #High Quality Stream
                                 
