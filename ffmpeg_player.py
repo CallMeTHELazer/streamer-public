@@ -68,7 +68,7 @@ def player(filename,dry=False):
                                 "-b:v", "256k",      # Video bitrate: 5 Mbps
                                 "-vf", "scale=480:trunc(ow/a/2)*2",
                                 "-tune", "zerolatency",
-                                "-crf", "23",
+                                # "-crf", "23",
                                 "-hls_list_size", "0",
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_low"  # Destination URL for streaming
