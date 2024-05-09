@@ -10,7 +10,7 @@ directory_bumps = ["/home/pokeruadmin/streamer/bumps"]
 directory_youtube = ["/HDD_2/videos"]
 
 # Initialize empty list for filenames
-all_filenames = []
+# all_filenames = []
 
 def creator_series(series):
     if series is True:
@@ -49,6 +49,7 @@ def creator_youtube(youtube):
        print("Youtube Not Selected, please use '--youtube' if you want to search through the youtube.")
 
 def walker(directory_search):
+    all_filenames = []
     print("Walking Through Directories")
     for directory in directory_search:
     # Check if directory exists
