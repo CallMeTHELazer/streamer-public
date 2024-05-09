@@ -11,9 +11,9 @@ def player(filename,dry=False):
 
             probe_result = subprocess.run(ffprobe_command, capture_output=True)
             ffprobe_result = probe_result.stderr.decode("utf-8")
-            print("***OUTPUT OF FFPROBE***")
+            # print("***OUTPUT OF FFPROBE***")
             # print(ffprobe_result)
-            print("***END OF FFPROBE OUTPUT")
+            # print("***END OF FFPROBE OUTPUT")
 
             for i in range(1,10):
                 audio_stream = str(i)
@@ -122,7 +122,7 @@ def player(filename,dry=False):
                                 "-c:a", "aac",  # Audio codec: aac
                                 "-ac", "2",     # Audio channels: 2
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                # "-b:v", "10M",      # Video bitrate: 5 Mbps
+                                "-b:v", "10M",      # Video bitrate: 5 Mbps
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
                                 "-hls_list_size", "0",
                                 "-f", "flv",
