@@ -48,7 +48,7 @@ def player(filename,dry=False):
                                 # "-ac", "2",     # Audio channels: 2
                                 # "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 # "-maxrate", "10M",  # Maximum bitrate: 25000 kbps
-                                # "-bufsize", "1000k",    # Buffer size: 1000 kb
+                                "-bufsize", "1000k",    # Buffer size: 1000 kb
                                 # "-b:v", "5M",      # Video bitrate: 5 Mbps
                                 # "-f", "flv",     # Output format: FLV
                                 # "rtmp://10.0.0.19/live/stream"  # Destination URL for streaming
