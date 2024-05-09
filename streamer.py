@@ -24,13 +24,14 @@ json_movie_file = args.movies_file
 json_series_file= args.series_file
 json_youtube_file= args.youtube_file
 json_bumps_file= "json_bumps.json"
-json_shuffled_movies_file = "/home/pokeruadmin/streamer/json_shuffled_movies.json"
-json_shuffled_series_file = "/home/pokeruadmin/streamer/json_shuffled_series.json"
-json_shuffled_bumps_file = "/home/pokeruadmin/streamer/json_shuffled_bumps.json"
+# json_shuffled_movies_file = "/home/pokeruadmin/streamer/json_shuffled_movies.json"
+# json_shuffled_series_file = "/home/pokeruadmin/streamer/json_shuffled_series.json"
+# json_shuffled_bumps_file = "/home/pokeruadmin/streamer/json_shuffled_bumps.json"
 json_shuffled_youtube_file = "/home/pokeruadmin/streamer/json_shuffled_youtube.json"
-# json_shuffled_movies_file = "json_shuffled_movies.json"
-# json_shuffled_series_file = "json_shuffled_series.json"
-# json_shuffled_bumps_file = "json_shuffled_bumps.json"
+json_shuffled_movies_file = "json_shuffled_movies.json"
+json_shuffled_series_file = "json_shuffled_series.json"
+json_shuffled_bumps_file = "json_shuffled_bumps.json"
+json_shuffled_bumps_file = "json_shuffled_youtube.json"
 
 kill_var = True
 
@@ -47,34 +48,47 @@ def shuffle_files(json_file,media_type):
 def play_random_media():
     """Plays a random media file from the specified media type."""
     media_type = ""
-    if args.series_file is not None and args.movies_file is not None:
-        # Both arguments provided, randomly choose between series or movies
-        media_type = random.choice(["series", "movies", "youtube"])
-        print(f"Playing random {media_type}...")    
-    if args.series_file is not None and args.movies_file is None and args.movies_file is None:
-        # Both arguments provided, randomly choose between series or movies
-        media_type = random.choice(["series"])
-        print(f"Playing random {media_type}...")
-    if args.series_file is None and args.movies_file is not None and args.movies_file is None:
-        # Both arguments provided, randomly choose between series or movies
-        media_type = random.choice(["movies"])
-        print(f"Playing random {media_type}...")
-    if args.series_file is None and args.movies_file is None and args.movies_file is not None:
-        # Both arguments provided, randomly choose between series or movies
-        media_type = random.choice(["movies"])
-        print(f"Playing random {media_type}...")
+    choices = []
+    if args.series_file is not None:
+        choices.append("series")
+        movies = jsoner.loader(json_shuffled_movies_file,"filenames")
+    if args.movies_file is not None:
+        choices.append("movies")
+        series = jsoner.loader(json_shuffled_series_file,"filenames")
+    if args.youtube_file is not None:
+        choices.append("youtube")
+        youtube = jsoner.loader(json_shuffled_youtube_file,"filenames")
+
+    media_type = random.choice(choices)
+
+    # if args.series_file is not None and args.movies_file is not None and args.youtube_file is not None:
+    #     # Both arguments provided, randomly choose between series or movies
+    #     media_type = random.choice(["series", "movies", "youtube"])
+    #     print(f"Playing random {media_type}...")    
+    # if args.series_file is not None and args.movies_file is None and args.youtube_file is None:
+    #     # Both arguments provided, randomly choose between series or movies
+    #     media_type = random.choice(["series"])
+    #     print(f"Playing random {media_type}...")
+    # if args.series_file is None and args.movies_file is not None and args.movies_file is None:
+    #     # Both arguments provided, randomly choose between series or movies
+    #     media_type = random.choice(["movies"])
+    #     print(f"Playing random {media_type}...")
+    # if args.series_file is None and args.movies_file is None and args.movies_file is not None:
+    #     # Both arguments provided, randomly choose between series or movies
+    #     media_type = random.choice(["movies"])
+    #     print(f"Playing random {media_type}...")
 
     played_successful = False
 
-    movies = jsoner.loader(json_shuffled_movies_file,"filenames")
-    series = jsoner.loader(json_shuffled_series_file,"filenames")
-    youtube = jsoner.loader(json_shuffled_youtube_file,"filenames")
+    
+    
+    
 
     if media_type == "series" and args.series_file is not None:
         # Use appropriate shuffled series filename (e.g., json_shuffled_series.json)
         for i, filename in enumerate(series):
             while played_successful is not True:
-                played_successful = ffmpeg_player.player(filename, "series")
+                played_successful = ffmpeg_player.player(filename, args.dry)
                 if played_successful:
                     del series[i]
                     jsoner.creator(series,"shuffled_"+media_type,"filenames")
@@ -84,7 +98,7 @@ def play_random_media():
         # Use appropriate shuffled movie filename (e.g., json_shuffled_movies.json)
         for i, filename in enumerate(movies):
             while played_successful is not True:
-                played_successful = ffmpeg_player.player(filename, "movies")
+                played_successful = ffmpeg_player.player(filename, args.dry)
                 if played_successful:
                     del movies[i]
                     jsoner.creator(movies,"shuffled_"+media_type,"filenames")
@@ -94,7 +108,7 @@ def play_random_media():
         # Use appropriate shuffled Youtube filename (e.g., json_shuffled_Youtube.json)
         for i, filename in enumerate(youtube):
             while played_successful is not True:
-                played_successful = ffmpeg_player.player(filename, "youtube")
+                played_successful = ffmpeg_player.player(filename, args.dry)
                 if played_successful:
                     del youtube[i]
                     jsoner.creator(youtube,"shuffled_"+media_type,"filenames")
