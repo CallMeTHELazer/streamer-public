@@ -44,90 +44,88 @@ def player(filename,dry=False):
                                 "-hwaccel",  # Enable hardware acceleration
                                 "cuda",      # Use CUDA for hardware acceleration
                                 "-hwaccel_output_format", "cuda",  # Use CUDA for output format
-                                # "-re",        # Repeat input (useful for streams)
+                                "-re",        # Repeat input (useful for streams)
                                 "-i", filename,  # Input file path (replace with actual filename variable)
-                                # "-async", "1",
-                                # "-vsync", "-1",
+                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                "-map", "0:v",
+                                "-map", f"0:{audio_stream}",  # Selects the the English audio
+                                "-map", f"0:{subtitle_stream}?",
+                                "-c:a", "aac",  # Audio codec: aac
+                                "-ac", "2",     # Audio channels: 2
+                                "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                "-maxrate", "10M",  # Maximum bitrate: 25000 kbps
+                                "-bufsize", "1000k",    # Buffer size: 1000 kb
+                                "-b:v", "5M",      # Video bitrate: 5 Mbps
+                                "-f", "flv",     # Output format: FLV
+                                "rtmp://10.0.0.19/live/stream"  # Destination URL for streaming
+                                
+                                #Low Quality Stream
+                                
                                 # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                # "-map", "0:v",
+                                # "-map", "0:0",
                                 # "-map", f"0:{audio_stream}",  # Selects the the English audio
                                 # "-map", f"0:{subtitle_stream}?",
                                 # "-c:a", "aac",  # Audio codec: aac
                                 # "-ac", "2",     # Audio channels: 2
                                 # "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                # "-maxrate", "10M",  # Maximum bitrate: 25000 kbps
-                                # "-bufsize", "1000k",    # Buffer size: 1000 kb
-                                # "-b:v", "5M",      # Video bitrate: 5 Mbps
-                                # "-f", "flv",     # Output format: FLV
-                                # "rtmp://10.0.0.19/live/stream"  # Destination URL for streaming
-                                
-                                #Low Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-map", "0:0",
-                                "-map", f"0:{audio_stream}",  # Selects the the English audio
-                                "-map", f"0:{subtitle_stream}?",
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "256k",      # Video bitrate: 5 Mbps
-                                # "-vf", "'scale=480:trunc(ow/a/2)*2'", #Will Figure out how this works later
-                                # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
-                                # "-crf", "23", #I dont think this is a HWACCEL setting
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_low",  # Destination URL for streaming
-
-                                #Mid Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-map", "0:0",
-                                "-map", f"0:{audio_stream}",  # Selects the the English audio
-                                "-map", f"0:{subtitle_stream}?",
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "768k",      # Video bitrate: 256k
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",
-                                # "-crf", "23",
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_mid",  # Destination URL for streaming
-
-                                #High Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-map", "0:0",
-                                "-map", f"0:{audio_stream}",  # Selects the the English audio
-                                "-map", f"0:{subtitle_stream}?",
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "1024k",      # Video bitrate: 5 Mbps
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
-                                # "-crf", "23", #I dont think this is a HWACCEL setting
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_high",  # Destination URL for streaming
-
-                                #Source Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-map", "0:0",
-                                "-map", f"0:{audio_stream}",  # Selects the the English audio
-                                "-map", f"0:{subtitle_stream}?",
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                # "-b:v", "10M",      # Video bitrate: 5 Mbps
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
-                                # "-crf", "23", #I dont think this is a HWACCEL setting
+                                # "-b:v", "256k",      # Video bitrate: 5 Mbps
+                                # # "-vf", "'scale=480:trunc(ow/a/2)*2'", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
+                                # # "-crf", "23", #I dont think this is a HWACCEL setting
                                 # "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_src"  # Destination URL for streaming
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/stream_low",  # Destination URL for streaming
+
+                                # #Mid Quality Stream
+                                
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-map", "0:0",
+                                # "-map", f"0:{audio_stream}",  # Selects the the English audio
+                                # "-map", f"0:{subtitle_stream}?",
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-b:v", "768k",      # Video bitrate: 256k
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",
+                                # # "-crf", "23",
+                                # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/stream_mid",  # Destination URL for streaming
+
+                                # #High Quality Stream
+                                
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-map", "0:0",
+                                # "-map", f"0:{audio_stream}",  # Selects the the English audio
+                                # "-map", f"0:{subtitle_stream}?",
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-b:v", "1024k",      # Video bitrate: 5 Mbps
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
+                                # # "-crf", "23", #I dont think this is a HWACCEL setting
+                                # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/stream_high",  # Destination URL for streaming
+
+                                # #Source Quality Stream
+                                
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-map", "0:0",
+                                # "-map", f"0:{audio_stream}",  # Selects the the English audio
+                                # "-map", f"0:{subtitle_stream}?",
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # # "-b:v", "10M",      # Video bitrate: 5 Mbps
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
+                                # # "-crf", "23", #I dont think this is a HWACCEL setting
+                                # # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/stream_src"  # Destination URL for streaming
 
                                 # ##-----Encoder-----##                                
                                                                 
