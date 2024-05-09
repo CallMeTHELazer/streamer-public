@@ -46,6 +46,8 @@ def player(filename,dry=False):
                                 "-hwaccel_output_format", "cuda",  # Use CUDA for output format
                                 "-re",        # Repeat input (useful for streams)
                                 "-i", filename,  # Input file path (replace with actual filename variable)
+                                "-async", "1",
+                                "-vsync", "-1",
                                 # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
                                 "-map", "0:v",
                                 "-map", f"0:{audio_stream}",  # Selects the the English audio
