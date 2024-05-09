@@ -71,7 +71,7 @@ def player(filename,dry=False):
                                 "-ac", "2",     # Audio channels: 2
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 "-b:v", "256k",      # Video bitrate: 5 Mbps
-                                "-vf", "'scale=480:trunc(ow/a/2)*2'", #Will Figure out how this works later
+                                # "-vf", "'scale=480:trunc(ow/a/2)*2'", #Will Figure out how this works later
                                 # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
                                 # "-crf", "23", #I dont think this is a HWACCEL setting
                                 "-hls_list_size", "0",
