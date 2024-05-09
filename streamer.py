@@ -24,14 +24,14 @@ json_movie_file = args.movies_file
 json_series_file= args.series_file
 json_youtube_file= args.youtube_file
 json_bumps_file= "json_bumps.json"
-# json_shuffled_movies_file = "/home/pokeruadmin/streamer/json_shuffled_movies.json"
-# json_shuffled_series_file = "/home/pokeruadmin/streamer/json_shuffled_series.json"
-# json_shuffled_bumps_file = "/home/pokeruadmin/streamer/json_shuffled_bumps.json"
+json_shuffled_movies_file = "/home/pokeruadmin/streamer/json_shuffled_movies.json"
+json_shuffled_series_file = "/home/pokeruadmin/streamer/json_shuffled_series.json"
+json_shuffled_bumps_file = "/home/pokeruadmin/streamer/json_shuffled_bumps.json"
 json_shuffled_youtube_file = "/home/pokeruadmin/streamer/json_shuffled_youtube.json"
-json_shuffled_movies_file = "json_shuffled_movies.json"
-json_shuffled_series_file = "json_shuffled_series.json"
-json_shuffled_bumps_file = "json_shuffled_bumps.json"
-json_shuffled_bumps_file = "json_shuffled_youtube.json"
+# json_shuffled_movies_file = "json_shuffled_movies.json"
+# json_shuffled_series_file = "json_shuffled_series.json"
+# json_shuffled_bumps_file = "json_shuffled_bumps.json"
+# json_shuffled_youtube_file = "json_shuffled_youtube.json"
 
 kill_var = True
 
@@ -40,7 +40,7 @@ def shuffle_files(json_file,media_type):
     files = jsoner.loader(json_file,"filenames")
 
     shuffle(files)
-    
+
     jsoner.creator(files,"shuffled_"+media_type,"filenames")
     return files
 
