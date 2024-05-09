@@ -30,7 +30,7 @@ def player(filename,dry=False):
                     break
             else:
                 print(f"Notice: Could Not find English Subtitle Track. If this is incorrect, Please check the file with ffprobe {filename}")
-                subtitle_stream = str(2)
+                # subtitle_stream = str(2)
 
 
             ffmpeg_command = [
