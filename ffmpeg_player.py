@@ -117,63 +117,63 @@ def player(filename,dry=False):
                                 "-f", "flv",
                                 "rtmp://10.0.0.19/hls/stream_src",  # Destination URL for streaming
 
-                                ##-----Encoder-----##                                
+                                # ##-----Encoder-----##                                
                                                                 
-                                #Low Quality Stream
+                                # #Low Quality Stream
                                 
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "256k",      # Video bitrate: 5 Mbps
-                                # "-vf", "scale=480", #Will Figure out how this works later
-                                # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
-                                # "-crf", "23", #I dont think this is a HWACCEL setting
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/encoder/stream_low",  # Destination URL for streaming
-
-                                #Mid Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "768k",      # Video bitrate: 256k
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",
-                                # "-crf", "23",
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/encoderstream_mid",  # Destination URL for streaming
-
-                                #High Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
-                                "-b:v", "1024k",      # Video bitrate: 5 Mbps
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
-                                # "-crf", "23", #I dont think this is a HWACCEL setting
-                                "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/encoderstream_high",  # Destination URL for streaming
-
-                                #Source Quality Stream
-                                
-                                "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-c:a", "aac",  # Audio codec: aac
-                                "-ac", "2",     # Audio channels: 2
-                                "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 # "-b:v", "256k",      # Video bitrate: 5 Mbps
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
-                                # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
-                                # "-crf", "23", #I dont think this is a HWACCEL setting
+                                # # "-vf", "scale=480", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
+                                # # "-crf", "23", #I dont think this is a HWACCEL setting
                                 # "-hls_list_size", "0",
-                                "-f", "flv",
-                                "rtmp://10.0.0.19/hls/encoderstream_src"  # Destination URL for streaming
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/encoder/stream_low",  # Destination URL for streaming
+
+                                # #Mid Quality Stream
+                                
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-b:v", "768k",      # Video bitrate: 256k
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",
+                                # # "-crf", "23",
+                                # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/encoderstream_mid",  # Destination URL for streaming
+
+                                # #High Quality Stream
+                                
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # "-b:v", "1024k",      # Video bitrate: 5 Mbps
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
+                                # # "-crf", "23", #I dont think this is a HWACCEL setting
+                                # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/encoderstream_high",  # Destination URL for streaming
+
+                                # #Source Quality Stream
+                                
+                                # "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
+                                # "-c:a", "aac",  # Audio codec: aac
+                                # "-ac", "2",     # Audio channels: 2
+                                # "-ar", "22050",  # Audio sample rate: 22050 Hz
+                                # # "-b:v", "256k",      # Video bitrate: 5 Mbps
+                                # # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                # # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
+                                # # "-crf", "23", #I dont think this is a HWACCEL setting
+                                # # "-hls_list_size", "0",
+                                # "-f", "flv",
+                                # "rtmp://10.0.0.19/hls/encoderstream_src"  # Destination URL for streaming
                             ]
             print(ffmpeg_command)
             print(f"Notice: Playing \"{filename}\" with Audio stream \"{audio_stream}\".")
