@@ -115,7 +115,7 @@ def player(filename,dry=False):
                                 # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
                                 "-hls_list_size", "0",
                                 "-f", "flv",
-                                "rtmp://10.0.0.19/hls/stream_high",  # Destination URL for streaming
+                                "rtmp://10.0.0.19/hls/stream_higher",  # Destination URL for streaming
 
                                 #Source Quality Stream
                                 
