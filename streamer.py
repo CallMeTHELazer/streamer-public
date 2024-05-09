@@ -79,6 +79,7 @@ def play_random_media():
                 played_successful = ffmpeg_player.player(filename, "series")
                 del series[i]
                 jsoner.creator(series,"shuffled_"+media_type,"filenames")
+                break
         return True
     elif media_type == "movies" and args.movies_file is not None:
         # Use appropriate shuffled movie filename (e.g., json_shuffled_movies.json)
@@ -87,6 +88,7 @@ def play_random_media():
                 played_successful = ffmpeg_player.player(filename, "movies")
                 del movies[i]
                 jsoner.creator(movies,"shuffled_"+media_type,"filenames")
+                break
         return True
     elif media_type == "youtube" and args.youtube_file is not None:
         # Use appropriate shuffled Youtube filename (e.g., json_shuffled_Youtube.json)
@@ -95,6 +97,7 @@ def play_random_media():
                 played_successful = ffmpeg_player.player(filename, "youtube")
                 del youtube[i]
                 jsoner.creator(youtube,"shuffled_"+media_type,"filenames")
+                break
         return True
     else:
         print(f"No {media_type} file provided or both arguments were specified.")
