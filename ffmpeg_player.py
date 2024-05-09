@@ -40,11 +40,11 @@ def player(filename,dry=False):
 
             ffmpeg_command = [
                                 "ffmpeg",  # Path to the ffmpeg executable
-                                "-y",        # Overwrite output files
+                                # "-y",        # Overwrite output files
                                 "-hwaccel",  # Enable hardware acceleration
                                 "cuda",      # Use CUDA for hardware acceleration
                                 "-hwaccel_output_format", "cuda",  # Use CUDA for output format
-                                "-re",        # Repeat input (useful for streams)
+                                # "-re",        # Repeat input (useful for streams)
                                 "-i", filename,  # Input file path (replace with actual filename variable)
                                 # "-async", "1",
                                 # "-vsync", "-1",
@@ -68,7 +68,7 @@ def player(filename,dry=False):
                                 "-ac", "2",     # Audio channels: 2
                                 "-ar", "22050",  # Audio sample rate: 22050 Hz
                                 "-b:v", "256k",      # Video bitrate: 5 Mbps
-                                # "-vf", "scale=480:trunc(ow/a/2)*2", #Will Figure out how this works later
+                                "-vf", "scale=480", #Will Figure out how this works later
                                 # "-tune", "zerolatency",   #I dont think this is a HWACCEL setting
                                 # "-crf", "23", #I dont think this is a HWACCEL setting
                                 "-hls_list_size", "0",
