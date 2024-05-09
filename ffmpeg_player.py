@@ -64,7 +64,7 @@ def player(filename,dry=False):
                                 #Low Quality Stream
                                 
                                 "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                "-map", "0:v",
+                                "-map", "0:0",
                                 "-map", f"0:{audio_stream}",  # Selects the the English audio
                                 "-map", f"0:{subtitle_stream}?",
                                 "-c:a", "aac",  # Audio codec: aac
@@ -81,7 +81,7 @@ def player(filename,dry=False):
                                 #Mid Quality Stream
                                 
                                 "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                # "-map", "0:v",
+                                "-map", "0:0",
                                 "-map", f"0:{audio_stream}",  # Selects the the English audio
                                 "-map", f"0:{subtitle_stream}?",
                                 "-c:a", "aac",  # Audio codec: aac
@@ -98,7 +98,7 @@ def player(filename,dry=False):
                                 #High Quality Stream
                                 
                                 "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                # "-map", "0:v",
+                                "-map", "0:0",
                                 "-map", f"0:{audio_stream}",  # Selects the the English audio
                                 "-map", f"0:{subtitle_stream}?",
                                 "-c:a", "aac",  # Audio codec: aac
@@ -115,7 +115,7 @@ def player(filename,dry=False):
                                 #Source Quality Stream
                                 
                                 "-c:v", "h264_nvenc",  # Video codec: h264 using NVENC encoder
-                                # "-map", "0:v",
+                                "-map", "0:0",
                                 "-map", f"0:{audio_stream}",  # Selects the the English audio
                                 "-map", f"0:{subtitle_stream}?",
                                 "-c:a", "aac",  # Audio codec: aac
