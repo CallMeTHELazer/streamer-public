@@ -61,27 +61,7 @@ def play_random_media():
 
     media_type = random.choice(choices)
 
-    # if args.series_file is not None and args.movies_file is not None and args.youtube_file is not None:
-    #     # Both arguments provided, randomly choose between series or movies
-    #     media_type = random.choice(["series", "movies", "youtube"])
-    #     print(f"Playing random {media_type}...")    
-    # if args.series_file is not None and args.movies_file is None and args.youtube_file is None:
-    #     # Both arguments provided, randomly choose between series or movies
-    #     media_type = random.choice(["series"])
-    #     print(f"Playing random {media_type}...")
-    # if args.series_file is None and args.movies_file is not None and args.movies_file is None:
-    #     # Both arguments provided, randomly choose between series or movies
-    #     media_type = random.choice(["movies"])
-    #     print(f"Playing random {media_type}...")
-    # if args.series_file is None and args.movies_file is None and args.movies_file is not None:
-    #     # Both arguments provided, randomly choose between series or movies
-    #     media_type = random.choice(["movies"])
-    #     print(f"Playing random {media_type}...")
-
     played_successful = False
-
-    
-    
     
 
     if media_type == "series" and args.series_file is not None:
