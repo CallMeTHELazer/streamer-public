@@ -15,7 +15,7 @@ def creator(json_data, json_filename, variable=None):
   else:
     data = json_data
 
-  output_file = "json_" + json_filename + ".json"  # Construct output filename
+  output_file = json_filename  # Construct output filename
 
   with open(output_file, 'w') as json_file:
     json.dump(data, json_file, indent=4)  # Dump data with indentation
@@ -94,3 +94,57 @@ def TextToJSON(txt_file, filename=None):
   if filename is None:
     # Since the filename argument is not currently used, we can just return the list
     return json_list
+
+import json
+
+
+def appender(json_filename, json_data, variable=None):
+  """
+  Appends JSON data to the specified file.
+
+  Args:
+      json_data (dict or list): The data to be appended.
+      json_filename (str): Path to the JSON file.
+      variable (str, optional): Optional variable name to wrap the data in a dictionary. Defaults to None.
+
+  Returns:
+      bool: True if successful, False otherwise.
+  """
+
+  try:
+    # Construct output filename
+    output_file = json_filename
+
+    # Open the existing file for reading (assuming it exists)
+    with open(output_file, 'r') as json_file:
+      try:
+        # Load existing data (handling potential empty file)
+        existing_data = json.load(json_file)
+      except json.JSONDecodeError:
+        # If the file is empty, existing_data will be an empty list or object
+        existing_data = []
+
+    # Check if existing data is a list or a dictionary
+    if not isinstance(existing_data, (list, dict)):
+      print(f"Error: Existing data in '{output_file}' has unexpected type: {type(existing_data)}")
+      return False
+
+    # Wrap data in a dictionary if a variable is provided
+    appended_data = {variable: json_data} if variable else json_data
+
+    # Combine existing data and appended data
+    combined_data = existing_data + appended_data
+
+    # Open the file for writing (overwriting existing content)
+    with open(output_file, 'w') as json_file:
+      json.dump(combined_data, json_file, indent=4)
+
+    print(f"JSON data saved to: {output_file}")
+    return True
+
+  except FileNotFoundError:
+    print(f"Error: File '{output_file}' not found.")
+    return False
+  except json.JSONDecodeError:
+    print(f"Error: Failed to decode existing JSON data in '{output_file}'.")
+    return False

@@ -15,7 +15,7 @@ def creator_series(series):
         print("Series Requested. Gathering Series filenames.")
         # Loop through target directories
         files = walker(directory_series)
-        jsoner.creator(files,"directory","series")
+        jsoner.creator(files,"json_directory","series")
     else:
        print("Series Not Selected, please use '--series' if you want to search through the series.")
 
@@ -24,7 +24,7 @@ def creator_movies(movies):
         print("Movies Requested. Gathering Movies filenames.")
         # Loop through target directories
         files = walker(directory_movies)
-        jsoner.creator(files,"directory","movies")
+        jsoner.creator(files,"json_directory","movies")
     else:
        print("Movies Not Selected, please use '--movies' if you want to search through the movies.")
 
@@ -33,7 +33,7 @@ def creator_bumps(bumps):
         print("Bumps Requested. Gathering Bumps filenames.")
         # Loop through target directories
         files = walker(directory_bumps)
-        jsoner.creator(files,"directory","movies")
+        jsoner.creator(files,"json_directory","bumps")
     else:
        print("Bumps Not Selected, please use '--bumps' if you want to search through the bumps.")
 
@@ -42,7 +42,7 @@ def creator_youtube(youtube):
         print("Youtube Requested. Gathering Bumps filenames.")
         # Loop through target directories
         files = walker(directory_youtube)
-        jsoner.creator(files,"directory","movies")
+        jsoner.creator(files,"json_directory","movies")
     else:
        print("Youtube Not Selected, please use '--youtube' if you want to search through the youtube.")
 
