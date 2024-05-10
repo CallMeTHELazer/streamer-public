@@ -15,6 +15,7 @@ def creator_series(series):
         print("Series Requested. Gathering Series filenames.")
         # Loop through target directories
         files = walker(directory_series)
+        return files
         jsoner.creator(files,"json_directory.json","series")
     else:
        print("Series Not Selected, please use '--series' if you want to search through the series.")
@@ -24,6 +25,7 @@ def creator_movies(movies):
         print("Movies Requested. Gathering Movies filenames.")
         # Loop through target directories
         files = walker(directory_movies)
+        return files
         jsoner.creator(files,"json_directory.json","movies")
     else:
        print("Movies Not Selected, please use '--movies' if you want to search through the movies.")
@@ -33,6 +35,7 @@ def creator_bumps(bumps):
         print("Bumps Requested. Gathering Bumps filenames.")
         # Loop through target directories
         files = walker(directory_bumps)
+        return files
         jsoner.creator(files,"json_directory.json","bumps")
     else:
        print("Bumps Not Selected, please use '--bumps' if you want to search through the bumps.")
@@ -42,6 +45,7 @@ def creator_youtube(youtube):
         print("Youtube Requested. Gathering Bumps filenames.")
         # Loop through target directories
         files = walker(directory_youtube)
+        return files
         jsoner.creator(files,"json_directory.json","movies")
     else:
        print("Youtube Not Selected, please use '--youtube' if you want to search through the youtube.")
@@ -77,7 +81,10 @@ if __name__ == "__main__":
     parser.add_argument("-y", "--youtube", action="store_true", dest="youtube",
                         help="Enable YouTube mode (default: False)")
     args = parser.parse_args()
-    creator_movies(args.movies)
-    creator_series(args.series)
-    creator_bumps(args.bumps)
-    creator_youtube(args.youtube)
+    movies = creator_movies(args.movies)
+    series = creator_series(args.series)
+    bumps = creator_bumps(args.bumps)
+    youtube = creator_youtube(args.youtube)
+    combined = {"series": series, "movies": movies, "youtube": youtube, "bumps": bumps}
+
+    jsoner.creator(combined,"json_directory.json")
