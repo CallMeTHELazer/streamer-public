@@ -9,6 +9,10 @@ directory_movies = ["/HDD_1/plexmedia/movies", "/HDD_2/plexmedia/movies"]
 directory_bumps = ["/home/pokeruadmin/streamer/bumps"]
 directory_youtube = ["/HDD_2/videos"]
 
+movies = []
+series = []
+youtube = []
+bumps = []
 
 def creator_series(series):
     if series is True:
