@@ -1,8 +1,8 @@
 from random import shuffle, choice
-import random
+# import random
 import argparse
 import tools.jsoner as jsoner
-import time
+# import time
 import ffmpeg_player
 
 parser = argparse.ArgumentParser(description="Runs a stream poined at a webserver")
@@ -32,8 +32,8 @@ json_series_file= args.series_file
 json_youtube_file= args.youtube_file
 # json_bumps_file= "json_bumps.json"
 
-json_directory_file = "~/streamer-public/json_directory.json"
-json_shuffled_directory_file = "~/streamer-public/json_shuffled_directory.json"
+json_directory_file = "/home/pokeruadmin/streamer-public/json_directory.json"
+json_shuffled_directory_file = "/home/pokeruadmin/streamer-public/json_shuffled_directory.json"
 # json_directory_file = "json_directory.json"
 # json_shuffled_directory_file = "json_shuffled_directory.json"
 
