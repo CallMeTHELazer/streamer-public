@@ -46,8 +46,8 @@ json_youtube_file = args.youtube_file
 # Defining file paths for JSON files
 json_directory_file = "/home/pokeruadmin/streamer-public/json_directory.json"
 json_shuffled_directory_file = "/home/pokeruadmin/streamer-public/json_shuffled_directory.json"
-json_directory_file = "json_directory.json"
-json_shuffled_directory_file = "json_shuffled_directory.json"
+# json_directory_file = "json_directory.json"
+# json_shuffled_directory_file = "json_shuffled_directory.json"
 
 # Initializing a variable
 kill_var = True
