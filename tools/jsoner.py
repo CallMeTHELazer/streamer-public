@@ -1,4 +1,14 @@
 import json
+import logging
+import config_logging
+
+#Logging Configurarion
+logger = logging.getLogger(__name__)
+log_level = getattr(logging, config_logging.logging_level.upper())
+logging.basicConfig(level=log_level)
+# logger.setLevel(logging.config_logging.logging_level)
+file_handler = logging.FileHandler(config_logging.logging_file)
+logger.addHandler(file_handler)
 
 # Function to create a JSON file
 def creator(json_data, json_filename, variable=None):
@@ -20,7 +30,7 @@ def creator(json_data, json_filename, variable=None):
   with open(output_file, 'w') as json_file:
     json.dump(data, json_file, indent=4)  # Dump data with indentation
 
-  print(f"JSON data saved to: {output_file}")
+  logging.info(f"JSON data saved to: {output_file}")
 
 # Function to load data from a JSON file
 def loader(json_file, variable=None):
@@ -41,12 +51,12 @@ def loader(json_file, variable=None):
         if variable in data:  # Check if the key exists in the dictionary
           return data[variable]
         else:
-          print(f"Error: Variable '{variable}' not found in JSON data.")
+          logger.warning(f"Error: Variable '{variable}' not found in JSON data.")
           return None
       else:
         return data
   except FileNotFoundError:
-    print(f"Error: JSON file '{json_file}' not found. Please generate the JSON first.")
+    logger.critical(f"Error: JSON file '{json_file}' not found. Please generate the JSON first.")
     exit(1)
 
 # Function to count entries under a variable in JSON data (assuming it's a list)
@@ -60,7 +70,7 @@ def counter(json_file, variable=None):
   loaded_data = loader(json_file, variable)
   if loaded_data is not None:
     num_entries = len(loaded_data)
-    print(f"Number of entries under '{variable}': {num_entries}")
+    logger.info(f"Number of entries under '{variable}': {num_entries}")
     return num_entries
   else:
     return None
@@ -126,7 +136,7 @@ def appender(json_filename, json_data, variable=None):
 
     # Check if existing data is a list or a dictionary
     if not isinstance(existing_data, (list, dict)):
-      print(f"Error: Existing data in '{output_file}' has unexpected type: {type(existing_data)}")
+      logger.error(f"Error: Existing data in '{output_file}' has unexpected type: {type(existing_data)}")
       return False
 
     # Wrap data in a dictionary if a variable is provided
@@ -139,12 +149,12 @@ def appender(json_filename, json_data, variable=None):
     with open(output_file, 'w') as json_file:
       json.dump(combined_data, json_file, indent=4)
 
-    print(f"JSON data saved to: {output_file}")
+    logger.info(f"JSON data saved to: {output_file}")
     return True
 
   except FileNotFoundError:
-    print(f"Error: File '{output_file}' not found.")
+    logger.error(f"Error: File '{output_file}' not found.")
     return False
   except json.JSONDecodeError:
-    print(f"Error: Failed to decode existing JSON data in '{output_file}'.")
+    logger.critical(f"Error: Failed to decode existing JSON data in '{output_file}'.")
     return False

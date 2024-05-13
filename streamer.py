@@ -2,6 +2,16 @@ from random import shuffle, choice  # Importing shuffle and choice functions fro
 import argparse  # Importing argparse for parsing command-line arguments
 import tools.jsoner as jsoner  # Importing a module named jsoner from tools package
 import ffmpeg_player  # Importing ffmpeg_player module
+import logging
+import config_logging
+
+#Logging Configurarion
+logger = logging.getLogger(__name__)
+log_level = getattr(logging, config_logging.logging_level.upper())
+logging.basicConfig(level=log_level)
+# logger.setLevel(logging.config_logging.logging_level)
+file_handler = logging.FileHandler(config_logging.logging_file)
+logger.addHandler(file_handler)
 
 # Creating an argument parser object
 parser = argparse.ArgumentParser(description="Runs a stream pointed at a webserver")
@@ -36,6 +46,8 @@ json_youtube_file = args.youtube_file
 # Defining file paths for JSON files
 json_directory_file = "/home/pokeruadmin/streamer-public/json_directory.json"
 json_shuffled_directory_file = "/home/pokeruadmin/streamer-public/json_shuffled_directory.json"
+json_directory_file = "json_directory.json"
+json_shuffled_directory_file = "json_shuffled_directory.json"
 
 # Initializing a variable
 kill_var = True
@@ -55,6 +67,7 @@ def play_random_media():
         series = jsoner.loader(json_shuffled_directory_file, "series")  # Load shuffled series
     if args.movies_file:  # If movies file option is provided
         choices.append("movies")  # Add movies to choices
+        choices.append("movies")  # Add movies to choices
         movies = jsoner.loader(json_shuffled_directory_file, "movies")  # Load shuffled movies
     if args.youtube_file:  # If YouTube file option is provided
         choices.append("youtube")  # Add YouTube to choices
@@ -66,8 +79,10 @@ def play_random_media():
     if media_type == "series" and args.series_file:  # If media type is series and series file option is provided
         for i, filename in enumerate(series):  # Iterate over series filenames
             while not played_successful:  # While played not successful
+                logger.info(f"Playing Filename "+filename)
                 played_successful = ffmpeg_player.player(filename, args.dry)  # Play the media
                 if played_successful:
+                    logger.info(filename+" Played Successful.")
                     del series[i]  # Delete played file from series
                     combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
                     jsoner.creator(combined, json_shuffled_directory_file)  # Create JSON with updated media
@@ -76,8 +91,10 @@ def play_random_media():
     elif media_type == "movies" and args.movies_file:  # If media type is movies and movies file option is provided
         for i, filename in enumerate(movies):  # Iterate over movies filenames
             while not played_successful:  # While played not successful
+                logger.info(f"Playing Filename "+filename)
                 played_successful = ffmpeg_player.player(filename, args.dry)  # Play the media
                 if played_successful:
+                    logger.info(filename+" Played Successful.")
                     del movies[i]  # Delete played file from movies
                     combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
                     jsoner.creator(combined, json_shuffled_directory_file)  # Create JSON with updated media
@@ -86,15 +103,17 @@ def play_random_media():
     elif media_type == "youtube" and args.youtube_file:  # If media type is YouTube and YouTube file option is provided
         for i, filename in enumerate(youtube):  # Iterate over YouTube filenames
             while not played_successful:  # While played not successful
+                logger.info(f"Playing Filename "+filename)
                 played_successful = ffmpeg_player.player(filename, args.dry)  # Play the media
                 if played_successful:
+                    logger.info(filename+" Played Successful.")
                     del youtube[i]  # Delete played file from YouTube
                     combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
                     jsoner.creator(combined, json_shuffled_directory_file)  # Create JSON with updated media
                     break  # Break the loop
         return True  # Return True if played successfully
     else:
-        print(f"No {media_type} file provided or both arguments were specified.")
+        logger.critical(f"No {media_type} file provided or both arguments were specified.")
         return False  # Return False if media type not provided or arguments not specified
 
 # Main execution
@@ -102,7 +121,7 @@ if __name__ == "__main__":
     if args.override_file:  # If override file is provided
         played_successful = False  # Initializing a variable
         override_file = args.override_file  # Override file
-        print(f"Override Found. Playing File: " + override_file)  # Print override file
+        logger.info(f"Override Found. Playing File: " + override_file)  # Print override file
         while not played_successful:  # While played not successful
             played_successful = ffmpeg_player.player(override_file, args.dry)  # Play the media
 
@@ -113,13 +132,13 @@ if __name__ == "__main__":
 
         if args.shuffle:  # If shuffle option provided
             if args.series_file:  # If series file option provided
-                print(f"Series File Found.")  # Print series file found
+                logger.info(f"Series File Found.")  # Print series file found
                 shuffle(series)  # Shuffle series
             if args.movies_file:  # If movies file option provided
-                print(f"Movies File Found.")  # Print movies file found
+                logger.info(f"Movies File Found.")  # Print movies file found
                 shuffle(movies)  # Shuffle movies
             if args.youtube_file:  # If YouTube file option provided
-                print(f"Youtube File Found.")  # Print YouTube file found
+                logger.info(f"Youtube File Found.")  # Print YouTube file found
                 shuffle(youtube)  # Shuffle YouTube videos
             combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
             jsoner.creator(combined, json_shuffled_directory_file)
@@ -127,8 +146,23 @@ if __name__ == "__main__":
         while kill_var is True:
             kill_var = play_random_media()
             movies_left = jsoner.counter(json_shuffled_directory_file,"movies")
+            youtube_left = jsoner.counter(json_shuffled_directory_file,"youtube")
+            series_left = jsoner.counter(json_shuffled_directory_file,"series")
             if movies_left < 1:
-                break
+                logger.info(f"Movies List Exhausted, Shuffling Movies")
+                shuffle(movies)  # Shuffle movies
+                combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
+                jsoner.creator(combined, json_shuffled_directory_file)
+            if series_left < 1:
+                logger.info(f"Series List Exhausted, shuffleing Series.")
+                shuffle(series)  # Shuffle series
+                combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
+                jsoner.creator(combined, json_shuffled_directory_file)
+            if youtube_left < 1:
+                logger.info(f"Youtube List Exhausted, Shuffleing Youtube.")
+                shuffle(youtube)  # Shuffle YouTube videos
+                combined = {"series": series, "movies": movies, "youtube": youtube}  # Combined media
+                jsoner.creator(combined, json_shuffled_directory_file)
             # time.sleep(11)
 
     else:
