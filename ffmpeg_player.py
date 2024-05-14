@@ -48,6 +48,8 @@ def player(filename, dry=False):
             # If English subtitle stream is not found
             logger.warning(f"Notice: Could Not find English Subtitle Track. If this is incorrect, Please check the file with ffprobe {filename}")
 
+        subtitle_stream = "4"
+
         # Define the ffmpeg command to play the media file
         ffmpeg_command = [
             "ffmpeg",  # Path to the ffmpeg executable
