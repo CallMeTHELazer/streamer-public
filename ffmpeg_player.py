@@ -58,22 +58,22 @@ def player(filename, dry=False):
             "-hwaccel_output_format", "cuda",  # Use CUDA for output format
             "-re",  # Repeat input (useful for streams)
             "-i", filename,  # Input file path
-            # Low Quality Stream
-            "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
-            "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "256k",
-            "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_low",
-            # Mid Quality Stream
-            "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
-            "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "768k",
-            "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_mid",
-            # High Quality Stream
-            "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
-            "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "1024k",
-            "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_high",
-            # Higher Quality Stream
-            "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
-            "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "1920k",
-            "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_higher",
+            # # Low Quality Stream
+            # "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
+            # "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "256k",
+            # "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_low",
+            # # Mid Quality Stream
+            # "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
+            # "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "768k",
+            # "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_mid",
+            # # High Quality Stream
+            # "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
+            # "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "1024k",
+            # "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_high",
+            # # Higher Quality Stream
+            # "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
+            # "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "1920k",
+            # "-hls_list_size", "0", "-f", "flv", "rtmp://10.0.0.19/hls/stream_higher",
             # Source Quality Stream
             "-c:v", "h264_nvenc", "-map", "0:0", "-map", f"0:{audio_stream}", "-map", f"0:{subtitle_stream}?",
             "-c:a", "aac", "-ac", "2", "-ar", "22050", "-b:v", "10M",
