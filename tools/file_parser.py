@@ -69,9 +69,9 @@ def walker(directory_search):
                         full_path = os.path.join(root, filename)
                         # Append to list
                         all_filenames.append(full_path)
-            return all_filenames
         else:
             print(f"Directory '{directory}' does not exist. Skipping...")
+        return all_filenames
 
 
 if __name__ == "__main__":
